@@ -1,6 +1,6 @@
 //var txr = [];  ////////
 
-export function processTransactions(transActions) {
+function processTransactions(transActions) {
 
     let txr = [];
 
@@ -35,4 +35,4 @@ function sortByAmountThenName(txCount) {
     return sortedResults;
 }
 
-//module.exports = processTransactions;
+module.exports = processTransactions;

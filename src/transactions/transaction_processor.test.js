@@ -1,4 +1,5 @@
-const processTransactions = require('./transaction_processor')
+//const processTransactions = require('./transaction_processor.mjs')
+import { processTransactions } from "./transaction_processor.js";
 
 test('check transaction processing when empty', () => {
     expect(processTransactions([])).toEqual([]);
