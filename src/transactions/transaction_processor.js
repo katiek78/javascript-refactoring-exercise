@@ -1,26 +1,18 @@
-export function processTransactions(transActions) {
+export function processTransactions(transactions) {
 
-    if (!transActions) {
-        throw new Error("Undefined collection of transactions")
+    if (!transactions) throw new Error("Undefined collection of transactions");
+    
+    let transactionCount = {};
+
+    for (const transaction of transactions) {
+        transactionCount[transaction] ? transactionCount[transaction] += 1 : transactionCount[transaction] = 1;
     }
-
-    let txCount = {}
-
-    for (const transaction of transActions) {
-        txCount[transaction] ? txCount[transaction] += 1 : txCount[transaction] = 1;
-    }
-
-    txCount = sortByAmountThenName(txCount);
-
-    // Place them back in array for returning    
-    return Object.keys(txCount).map(key => `${key} ${txCount[key]}`)
+    
+    const transactionKeys = sortByAmountThenName(transactionCount);
+ 
+    return transactionKeys.map(key => `${key} ${transactionCount[key]}`)
 }
 
-function sortByAmountThenName(txCount) {
-    const sortedKeys = Object.keys(txCount).sort((itemOne, itemTwo) => txCount[itemTwo] - txCount[itemOne] || (itemOne > itemTwo ? 1 : -1));
-    const sortedResults = {};
-    for (const objectKey of sortedKeys) {
-        sortedResults[objectKey] = txCount[objectKey];
-    }
-    return sortedResults;
+function sortByAmountThenName(transactionCount) {
+    return Object.keys(transactionCount).sort((itemOne, itemTwo) => transactionCount[itemTwo] - transactionCount[itemOne] || (itemOne > itemTwo ? 1 : -1));
 }
